@@ -1,10 +1,6 @@
-import Button from "./Button/Button";
+import Counter from "./Counter";
 function App() {
-  return (
-    <>
-      <Button></Button>
-    </>
-  );
+  return <Counter></Counter>;
 }
 
 export default App;
