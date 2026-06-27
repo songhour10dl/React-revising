@@ -1,6 +1,6 @@
-import Counter from "./Counter";
+import ColorPicker from "./ColorPicker";
 function App() {
-  return <Counter></Counter>;
+  return <ColorPicker></ColorPicker>;
 }
 
 export default App;
