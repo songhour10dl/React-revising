@@ -1,71 +1,30 @@
 import React, { useState } from "react";
 function MyComponents() {
-  const [name, setName] = useState("Guest");
-  const [quantity, setQuantity] = useState();
-  const [comment, setComment] = useState();
-  const [payment, setPayment] = useState();
-  const [shipping, setShipping] = useState();
+  const [foods, setFoods] = useState([]);
 
-  function handleNameChange(event) {
-    setName(event.target.value);
-  }
+  function handleAddFood() {
+    const newFood = document.getElementById("foodInput").value;
+    document.getElementById("foodInput").value = "";
 
-  function handleQuantityChange(event) {
-    setQuantity(event.target.value);
+    setFoods((f) => [...f, newFood]);
   }
-
-  function handleCommentChange(event) {
-    setComment(event.target.value);
-  }
-  function handlePaymentChange(event) {
-    setPayment(event.target.value);
-  }
-  function handleShippingChange(event) {
-    setShipping(event.target.value);
+  function handleRemoveFood(index) {
+    setFoods(foods.filter((_, i) => i != index));
   }
 
   return (
-    <>
-      <div>
-        <input value={name} onChange={handleNameChange} type="text" />
-        <p>Name: {name}</p>
-
-        <input value={quantity} onChange={handleQuantityChange} type="number" />
-        <p>Quantity: {quantity}</p>
-
-        <textarea value={comment} onChange={handleCommentChange}></textarea>
-        <p>Comment: {comment}</p>
-
-        <select value={payment} onChange={handlePaymentChange}>
-          <option value="">Select an Option</option>
-          <option value="Visa">Visa</option>
-          <option value="Master">Master</option>
-          <option value="GiftCard">GiftCard</option>
-        </select>
-        <p>Pyament: {payment}</p>
-      </div>
-      <label>
-        <input
-          type="radio"
-          value="Pick Up"
-          checked={shipping === "Pick Up"}
-          onChange={handleShippingChange}
-        />
-        PickUp
-      </label>
-      <label>
-        <br></br>
-        <input
-          type="radio"
-          value="Delivery"
-          checked={shipping === "Delivery"}
-          onChange={handleShippingChange}
-        />
-        Delivery
-      </label>
-
-      <p>Shipping :{shipping}</p>
-    </>
+    <div>
+      <h2>List of Food</h2>
+      <ul>
+        {foods.map((food, index) => (
+          <li key={index} onClick={() => handleRemoveFood(index)}>
+            {food}
+          </li>
+        ))}
+      </ul>
+      <input type="text" id="foodInput" placeholder="Enter food name" />
+      <button onClick={handleAddFood}>Add Food</button>
+    </div>
   );
 }
 

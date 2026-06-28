@@ -1,6 +1,6 @@
-import ColorPicker from "./ColorPicker";
+import MyComponents from "./MyComponents";
 function App() {
-  return <ColorPicker></ColorPicker>;
+  return <MyComponents></MyComponents>;
 }
 
 export default App;
