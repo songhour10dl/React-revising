@@ -1,29 +1,51 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 function MyComponents() {
-  const [foods, setFoods] = useState([]);
+  const [car, setCars] = useState([]);
+  const [carYear, setCarYear] = useState(0);
+  const [carMake, setCarMake] = useState("");
+  const [carModel, setCarModel] = useState("");
 
-  function handleAddFood() {
-    const newFood = document.getElementById("foodInput").value;
-    document.getElementById("foodInput").value = "";
+  function handleAddCar() {
+    const newCar = {
+      year: carYear,
+      make: carMake,
+      model: carModel,
+    };
 
-    setFoods((f) => [...f, newFood]);
+    setCars((c) => [...c, newCar]);
+
+    setCarYear(2026);
+    setCarMake("");
+    setCarModel("");
   }
-  function handleRemoveFood(index) {
-    setFoods(foods.filter((_, i) => i != index));
+  function handleRemoveCar(index) {
+    setCars((c) => c.filter((_, i) => i !== index));
   }
-
+  function handelYearChange(event) {
+    setCarYear(event.target.value);
+  }
+  function handelMakeChange(event) {
+    setCarMake(event.target.value);
+  }
+  function handelModelChange(event) {
+    setCarModel(event.target.value);
+  }
   return (
     <div>
-      <h2>List of Food</h2>
+      <h1>List of Car Objects</h1>
       <ul>
-        {foods.map((food, index) => (
-          <li key={index} onClick={() => handleRemoveFood(index)}>
-            {food}
+        {car.map((car, index) => (
+          <li key={index} onClick={() => handleRemoveCar(index)}>
+            {car.year} {car.make} {car.model}
           </li>
         ))}
       </ul>
-      <input type="text" id="foodInput" placeholder="Enter food name" />
-      <button onClick={handleAddFood}>Add Food</button>
+      <input type="number" value={carYear} onChange={handelYearChange} /> <br />
+      <input type="text" value={carMake} onChange={handelMakeChange} />
+      <br />
+      <input type="text" value={carModel} onChange={handelModelChange} />
+      <br />
+      <button onClick={handleAddCar}>Add car</button>
     </div>
   );
 }
