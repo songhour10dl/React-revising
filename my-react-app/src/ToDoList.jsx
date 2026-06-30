@@ -11,11 +11,36 @@ function ToDoList() {
   function handleInputChange(event) {
     setNewTask(event.target.value);
   }
-  function addTask() {}
-  function deleteTask(index) {}
-  function moveTaskUp(index) {}
-  function moveTaskDown(index) {}
-
+  function addTask() {
+    if (newTask.trim() !== "") {
+      setTasks((t) => [...t, newTask]);
+      setNewTask("");
+    }
+  }
+  function deleteTask(index) {
+    const updatedTask = tasks.filter((_, i) => i !== index);
+    setTasks(updatedTask);
+  }
+  function moveTaskUp(index) {
+    if (index > 0) {
+      const updatedTasks = [...tasks];
+      [updatedTasks[index], updatedTasks[index - 1]] = [
+        updatedTasks[index - 1],
+        updatedTasks[index],
+      ];
+      setTasks(updatedTasks);
+    }
+  }
+  function moveTaskDown(index) {
+    if (index < tasks.length - 1) {
+      const updatedTasks = [...tasks];
+      [updatedTasks[index], updatedTasks[index + 1]] = [
+        updatedTasks[index + 1],
+        updatedTasks[index],
+      ];
+      setTasks(updatedTasks);
+    }
+  }
   return (
     <div className="to-do-list">
       <h1>To-Do-List</h1>
@@ -37,10 +62,10 @@ function ToDoList() {
             <button className="delete-button" onClick={() => deleteTask(index)}>
               Delete
             </button>
-            <button className="move-up" onClick={() => moveTaskUp(index)}>
+            <button className="move-button" onClick={() => moveTaskUp(index)}>
               👆
             </button>
-            <button className="move-down" onClick={() => moveTaskDown(index)}>
+            <button className="move-button" onClick={() => moveTaskDown(index)}>
               👇
             </button>
           </li>
