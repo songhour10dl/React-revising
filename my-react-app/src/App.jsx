@@ -1,6 +1,6 @@
-import ToDoList from "./ToDoList";
+import DigitalClock from "./DigitalClock";
 function App() {
-  return <ToDoList></ToDoList>;
+  return <DigitalClock></DigitalClock>;
 }
 
 export default App;
